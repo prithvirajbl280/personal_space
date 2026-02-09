@@ -1,1 +1,120 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #E6E6FA 0%, #DDA0DD 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 6rem;
+            font-weight: 300;
+            letter-spacing: -2px;
+            color: #8B008B;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            transform: scaleX(0.5);
+            line-height: 1.2;
+        }
+
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 105, 180, 0.6);
+            animation: float 6s infinite ease-in-out;
+            transition: all 0.3s ease;
+        }
+
+        .heart:hover {
+            transform: scale(1.5) rotate(15deg);
+            color: rgba(255, 20, 147, 0.9);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-30px) rotate(3deg);
+            }
+        }
+
+        .heart:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; font-size: 2.5rem; }
+        .heart:nth-child(2) { top: 20%; left: 80%; animation-delay: 1s; font-size: 1.8rem; }
+        .heart:nth-child(3) { top: 70%; left: 15%; animation-delay: 2s; font-size: 2.2rem; }
+        .heart:nth-child(4) { top: 60%; left: 85%; animation-delay: 1.5s; font-size: 2rem; }
+        .heart:nth-child(5) { top: 40%; left: 5%; animation-delay: 0.5s; font-size: 1.5rem; }
+        .heart:nth-child(6) { top: 30%; left: 90%; animation-delay: 2.5s; font-size: 2.3rem; }
+        .heart:nth-child(7) { top: 80%; left: 70%; animation-delay: 1.2s; font-size: 1.9rem; }
+        .heart:nth-child(8) { top: 15%; left: 50%; animation-delay: 0.8s; font-size: 2.1rem; }
+        .heart:nth-child(9) { top: 85%; left: 40%; animation-delay: 2.2s; font-size: 1.7rem; }
+        .heart:nth-child(10) { top: 50%; left: 25%; animation-delay: 1.8s; font-size: 2.4rem; }
+        .heart:nth-child(11) { top: 25%; left: 35%; animation-delay: 0.3s; font-size: 1.6rem; }
+        .heart:nth-child(12) { top: 65%; left: 60%; animation-delay: 2.8s; font-size: 2rem; }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container">
+        <div class="heart">❤</div>
+        <div class="heart">💕</div>
+        <div class="heart">💖</div>
+        <div class="heart">❤</div>
+        <div class="heart">💕</div>
+        <div class="heart">💖</div>
+        <div class="heart">❤</div>
+        <div class="heart">💕</div>
+        <div class="heart">💖</div>
+        <div class="heart">❤</div>
+        <div class="heart">💕</div>
+        <div class="heart">💖</div>
+    </div>
+
+    <div class="container">
+        <h1>Happy<br>Valentine's<br>Day</h1>
+    </div>
+</body>
+</html>
