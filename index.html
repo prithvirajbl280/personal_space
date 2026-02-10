@@ -27,6 +27,46 @@
             color: var(--dark);
             overflow-x: hidden;
             background: #FFF5F5;
+            cursor: none;
+        }
+
+        .cursor-bubble {
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 107, 107, 0.6));
+            pointer-events: none;
+            transform: translate(-50%, -50%) translateZ(50px);
+            transition: opacity 0.3s ease, transform 0.15s ease;
+            opacity: 0;
+            z-index: 9999;
+            box-shadow:
+                0 10px 30px rgba(255, 107, 107, 0.4),
+                0 20px 60px rgba(255, 107, 107, 0.3),
+                inset 0 -5px 20px rgba(255, 255, 255, 0.5),
+                inset 0 5px 20px rgba(255, 107, 107, 0.3);
+            filter: blur(0.5px);
+            animation: bubblePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes bubblePulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) translateZ(50px) scale(1);
+                box-shadow:
+                    0 10px 30px rgba(255, 107, 107, 0.4),
+                    0 20px 60px rgba(255, 107, 107, 0.3),
+                    inset 0 -5px 20px rgba(255, 255, 255, 0.5),
+                    inset 0 5px 20px rgba(255, 107, 107, 0.3);
+            }
+            50% {
+                transform: translate(-50%, -50%) translateZ(60px) scale(1.08);
+                box-shadow:
+                    0 15px 40px rgba(255, 107, 107, 0.5),
+                    0 30px 80px rgba(255, 107, 107, 0.4),
+                    inset 0 -8px 25px rgba(255, 255, 255, 0.6),
+                    inset 0 8px 25px rgba(255, 107, 107, 0.4);
+            }
         }
 
         header {
@@ -360,6 +400,8 @@
     </style>
 </head>
 <body>
+    <div class="cursor-bubble" id="cursorBubble"></div>
+
     <header id="header">
         <div class="logo">
             <img src="public/logo.png" alt="Logo" class="logo-image">
@@ -428,7 +470,22 @@
         const heroLight = document.getElementById('heroLight');
         const header = document.getElementById('header');
         const memoriesGrid = document.getElementById('memoriesGrid');
+        const cursorBubble = document.getElementById('cursorBubble');
         let memories = JSON.parse(localStorage.getItem('memories')) || [];
+
+        document.addEventListener('mousemove', (e) => {
+            cursorBubble.style.left = `${e.clientX}px`;
+            cursorBubble.style.top = `${e.clientY}px`;
+            cursorBubble.style.opacity = '1';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursorBubble.style.opacity = '0';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            cursorBubble.style.opacity = '1';
+        });
 
         hero.addEventListener('mousemove', (e) => {
             const rect = hero.getBoundingClientRect();
