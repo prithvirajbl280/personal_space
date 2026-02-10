@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine's Day</title>
+    <title>Our Memories - A Valentine's Day</title>
     <style>
         * {
             margin: 0;
@@ -12,109 +12,504 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --coral: #FF6B6B;
+            --pink: #FF8E9E;
+            --light-pink: #FFB3BA;
+            --peach: #FFCCCB;
+            --white: #FFFFFF;
+            --dark: #2D2D2D;
+            --shadow: rgba(255, 107, 107, 0.2);
+        }
+
         body {
-            background: linear-gradient(135deg, #E6E6FA 0%, #DDA0DD 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-            position: relative;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background: #FFF5F5;
         }
 
-        .container {
-            text-align: center;
-            z-index: 10;
-            position: relative;
-        }
-
-        h1 {
-            font-size: 6rem;
-            font-weight: 300;
-            letter-spacing: -2px;
-            color: #8B008B;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            transform: scaleX(0.5);
-            line-height: 1.2;
-        }
-
-        .hearts-container {
-            position: absolute;
+        header {
+            position: fixed;
             top: 0;
             left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 107, 107, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--coral), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--coral), var(--pink));
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav a:hover { color: var(--coral); }
+        nav a:hover::after { width: 100%; }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #FF8E9E 0%, #FF6B6B 100%);
+            overflow: hidden;
+            padding: 2rem;
+            margin-top: 60px;
+        }
+
+        .hero-light {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+            transition: all 0.1s ease;
+            opacity: 0;
+        }
+
+        .floating-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.15;
+            animation: floatHeart 12s infinite ease-in-out;
+        }
+
+        @keyframes floatHeart {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            25% { transform: translateY(-40px) rotate(5deg) scale(1.1); }
+            50% { transform: translateY(-20px) rotate(-5deg) scale(0.9); }
+            75% { transform: translateY(-50px) rotate(3deg) scale(1.05); }
+        }
+
+        .floating-heart:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-heart:nth-child(2) { top: 20%; left: 80%; animation-delay: 1.2s; }
+        .floating-heart:nth-child(3) { top: 70%; left: 15%; animation-delay: 2.4s; }
+        .floating-heart:nth-child(4) { top: 60%; left: 85%; animation-delay: 1.8s; }
+        .floating-heart:nth-child(5) { top: 40%; left: 5%; animation-delay: 0.6s; }
+        .floating-heart:nth-child(6) { top: 30%; left: 90%; animation-delay: 3s; }
+        .floating-heart:nth-child(7) { top: 80%; left: 70%; animation-delay: 1.5s; }
+        .floating-heart:nth-child(8) { top: 15%; left: 50%; animation-delay: 0.9s; }
+        .floating-heart:nth-child(9) { top: 85%; left: 40%; animation-delay: 2.7s; }
+        .floating-heart:nth-child(10) { top: 50%; left: 25%; animation-delay: 2.1s; }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1200px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 10vw, 6rem);
+            font-weight: 700;
+            color: var(--white);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-title span {
+            display: inline-block;
+            opacity: 0;
+            animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .hero-title span:nth-child(1) { animation-delay: 0.1s; }
+        .hero-title span:nth-child(2) { animation-delay: 0.2s; }
+        .hero-title span:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+        }
+
+        .memories-section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--coral), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 4rem;
+        }
+
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .memory-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .memory-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
             pointer-events: none;
         }
 
-        .heart {
-            position: absolute;
-            font-size: 2rem;
-            color: rgba(255, 105, 180, 0.6);
-            animation: float 6s infinite ease-in-out;
+        .memory-card:hover::before { left: 100%; }
+
+        .memory-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+        }
+
+        .memory-image-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--light-pink), var(--peach));
+        }
+
+        .memory-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .memory-card:hover .memory-image {
+            transform: scale(1.1);
+        }
+
+        .memory-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--light-pink), var(--peach));
+        }
+
+        .memory-info {
+            padding: 2rem;
+        }
+
+        .memory-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .memory-date {
+            font-size: 0.85rem;
+            color: var(--coral);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .memory-description {
+            color: #666;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .upload-section {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.05), rgba(255, 142, 158, 0.05));
+            border-radius: 20px;
+            border: 2px dashed var(--pink);
+            margin: 3rem 0;
+        }
+
+        .upload-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--coral);
+            margin-bottom: 1rem;
+        }
+
+        .upload-input {
+            display: none;
+        }
+
+        .upload-button {
+            background: linear-gradient(135deg, var(--coral), var(--pink));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s ease;
+            margin: 0.5rem;
         }
 
-        .heart:hover {
-            transform: scale(1.5) rotate(15deg);
-            color: rgba(255, 20, 147, 0.9);
+        .upload-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px var(--shadow);
         }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            25% {
-                transform: translateY(-20px) rotate(5deg);
-            }
-            50% {
-                transform: translateY(-10px) rotate(-5deg);
-            }
-            75% {
-                transform: translateY(-30px) rotate(3deg);
-            }
-        }
-
-        .heart:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; font-size: 2.5rem; }
-        .heart:nth-child(2) { top: 20%; left: 80%; animation-delay: 1s; font-size: 1.8rem; }
-        .heart:nth-child(3) { top: 70%; left: 15%; animation-delay: 2s; font-size: 2.2rem; }
-        .heart:nth-child(4) { top: 60%; left: 85%; animation-delay: 1.5s; font-size: 2rem; }
-        .heart:nth-child(5) { top: 40%; left: 5%; animation-delay: 0.5s; font-size: 1.5rem; }
-        .heart:nth-child(6) { top: 30%; left: 90%; animation-delay: 2.5s; font-size: 2.3rem; }
-        .heart:nth-child(7) { top: 80%; left: 70%; animation-delay: 1.2s; font-size: 1.9rem; }
-        .heart:nth-child(8) { top: 15%; left: 50%; animation-delay: 0.8s; font-size: 2.1rem; }
-        .heart:nth-child(9) { top: 85%; left: 40%; animation-delay: 2.2s; font-size: 1.7rem; }
-        .heart:nth-child(10) { top: 50%; left: 25%; animation-delay: 1.8s; font-size: 2.4rem; }
-        .heart:nth-child(11) { top: 25%; left: 35%; animation-delay: 0.3s; font-size: 1.6rem; }
-        .heart:nth-child(12) { top: 65%; left: 60%; animation-delay: 2.8s; font-size: 2rem; }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
-            }
+            header { padding: 1rem; }
+            nav { gap: 1rem; }
+            nav a { font-size: 0.9rem; }
+            .hero { margin-top: 50px; }
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .memories-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
-    <div class="hearts-container">
-        <div class="heart">❤</div>
-        <div class="heart">💕</div>
-        <div class="heart">💖</div>
-        <div class="heart">❤</div>
-        <div class="heart">💕</div>
-        <div class="heart">💖</div>
-        <div class="heart">❤</div>
-        <div class="heart">💕</div>
-        <div class="heart">💖</div>
-        <div class="heart">❤</div>
-        <div class="heart">💕</div>
-        <div class="heart">💖</div>
-    </div>
+    <header id="header">
+        <div class="logo">
+            <img src="public/logo.png" alt="Logo" class="logo-image">
+            <span class="logo-text">Our Love</span>
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#memories">Memories</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-    <div class="container">
-        <h1>Happy<br>Valentine's<br>Day</h1>
-    </div>
+    <section class="hero" id="home">
+        <div class="hero-light" id="heroLight"></div>
+
+        <div class="floating-bg">
+            <div class="floating-heart">❤️</div>
+            <div class="floating-heart">💕</div>
+            <div class="floating-heart">❤️</div>
+            <div class="floating-heart">💕</div>
+            <div class="floating-heart">❤️</div>
+            <div class="floating-heart">💕</div>
+            <div class="floating-heart">❤️</div>
+            <div class="floating-heart">💕</div>
+            <div class="floating-heart">❤️</div>
+            <div class="floating-heart">💕</div>
+        </div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span>Our</span><br>
+                <span>Beautiful</span><br>
+                <span>Memories</span>
+            </h1>
+            <p class="hero-subtitle">Every moment with you is special</p>
+        </div>
+    </section>
+
+    <section class="memories-section" id="memories">
+        <h2 class="section-title">Our Story</h2>
+        <p class="section-subtitle">Cherish the moments we share together</p>
+
+        <div class="upload-section">
+            <h3 class="upload-title">Add Our Memories</h3>
+            <p style="color: #666; margin-bottom: 1.5rem;">Upload photos and add descriptions of our special moments</p>
+            <button class="upload-button" onclick="document.getElementById('photoInput').click()">Upload Photo</button>
+            <input type="file" id="photoInput" class="upload-input" accept="image/*" onchange="handlePhotoUpload(event)">
+        </div>
+
+        <div class="memories-grid" id="memoriesGrid">
+            <div class="memory-card">
+                <div class="memory-image-container">
+                    <div class="memory-placeholder">💕</div>
+                </div>
+                <div class="memory-info">
+                    <div class="memory-date">Add Your First Memory</div>
+                    <h3 class="memory-title">Our Beginning</h3>
+                    <p class="memory-description">Upload a photo and add a description of your favorite memory together</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const hero = document.querySelector('.hero');
+        const heroLight = document.getElementById('heroLight');
+        const header = document.getElementById('header');
+        const memoriesGrid = document.getElementById('memoriesGrid');
+        let memories = JSON.parse(localStorage.getItem('memories')) || [];
+
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            heroLight.style.left = `${x - 250}px`;
+            heroLight.style.top = `${y - 250}px`;
+            heroLight.style.opacity = '1';
+        });
+
+        hero.addEventListener('mouseleave', () => {
+            heroLight.style.opacity = '0';
+        });
+
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const memory = {
+                        id: Date.now(),
+                        image: e.target.result,
+                        title: prompt('Enter a title for this memory:') || 'Beautiful Moment',
+                        description: prompt('Add a description:') || 'A special moment we share',
+                        date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+                    };
+
+                    memories.unshift(memory);
+                    localStorage.setItem('memories', JSON.stringify(memories));
+                    renderMemories();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function renderMemories() {
+            if (memories.length === 0) {
+                memoriesGrid.innerHTML = `
+                    <div class="memory-card">
+                        <div class="memory-image-container">
+                            <div class="memory-placeholder">💕</div>
+                        </div>
+                        <div class="memory-info">
+                            <div class="memory-date">Start Your Collection</div>
+                            <h3 class="memory-title">Our Beginning</h3>
+                            <p class="memory-description">Upload photos of your favorite moments together and add sweet descriptions</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            memoriesGrid.innerHTML = memories.map(memory => `
+                <div class="memory-card">
+                    <div class="memory-image-container">
+                        <img src="${memory.image}" alt="${memory.title}" class="memory-image">
+                    </div>
+                    <div class="memory-info">
+                        <div class="memory-date">${memory.date}</div>
+                        <h3 class="memory-title">${memory.title}</h3>
+                        <p class="memory-description">${memory.description}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        renderMemories();
+    </script>
 </body>
 </html>
